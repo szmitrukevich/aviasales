@@ -1,9 +1,9 @@
 import React from 'react'
 import { createRoot } from 'react-dom/client'
 
-import './index.css'
+import './index.scss'
 import App from './components/App'
 
-const container = document.querySelector('.todoapp')
+const container = document.querySelector('.aviasales')
 const root = createRoot(container)
 root.render(<App />)
