@@ -1,18 +1,15 @@
 import React from 'react'
-import { Radio } from 'antd'
-import './App.scss'
-import 'antd/dist/antd.min.css'
+
+import './App.modules.scss'
+import Tabs from '../Tabs'
+import TicketList from '../TicketList'
+import Filter from '../Filter'
 
 const App = () => (
-  <div>
-    <Radio.Group
-      defaultValue="a"
-      buttonStyle="solid"
-    >
-      <Radio.Button value="a">Самый дешёвый</Radio.Button>
-      <Radio.Button value="b">Самый быстрый</Radio.Button>
-      <Radio.Button value="c">Оптимальный</Radio.Button>
-    </Radio.Group>
+  <div className="app">
+    <Filter />
+    <Tabs />
+    <TicketList />
   </div>
 )
 

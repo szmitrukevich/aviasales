@@ -1,9 +1,15 @@
 @import './assets/fonts/fonts.scss';
 
 body {
-    background-color: #E5E5E5!important;
+    background-color: #F3F7FA!important;
     font-family: 'Open Sans'!important;
 }
 .aviasales {
     margin: 160px auto 50px;
+    width: 90%;
+}
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
