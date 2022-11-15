@@ -1,15 +1,19 @@
 import React from 'react'
 
-import './App.modules.scss'
 import Tabs from '../Tabs'
 import TicketList from '../TicketList'
 import Filter from '../Filter'
+import classes from './App.module.scss'
 
 const App = () => (
-  <div className="app">
-    <Filter />
-    <Tabs />
-    <TicketList />
+  <div className={classes.app}>
+    <div className={classes.app__wrapper}>
+      <Filter />
+      <div className={classes.app__container}>
+        <Tabs />
+        <TicketList />
+      </div>
+    </div>
   </div>
 )
 

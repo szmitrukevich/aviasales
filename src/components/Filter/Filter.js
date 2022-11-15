@@ -1,9 +1,9 @@
 import React from 'react'
-import './Filter.module.scss'
+import classes from './Filter.module.scss'
 import FilterItem from '../FilterItem'
 
 const Filter = () => (
-  <div className="filter">
+  <div className={classes.filter}>
     <span className="filter__title">Количество пересадок</span>
     <ul className="filter-list">
       <FilterItem
