@@ -1,5 +1,5 @@
-.filter {
-    &__item {
+
+    .item {
         padding: 10px 20px;
         font-size: 13px;
         font-weight: 400px;
@@ -7,7 +7,7 @@
             background-color: #F1FCFF;
         }
     }
-    &__checkbox {
+    .checkbox {
         position: absolute;
         z-index: -1;
         opacity: 0;
@@ -15,6 +15,7 @@
             display: inline-flex;
             align-items: center;
             user-select: none;
+            cursor: pointer;
             &::before {
                 content: '';
                 display: inline-block;
@@ -35,4 +36,3 @@
             background-image: url('../../assets/icons/check.svg');
         }
     }
-}

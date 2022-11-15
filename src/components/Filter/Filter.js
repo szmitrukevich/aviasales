@@ -3,9 +3,9 @@ import classes from './Filter.module.scss'
 import FilterItem from '../FilterItem'
 
 const Filter = () => (
-  <div className={classes.filter}>
-    <span className="filter__title">Количество пересадок</span>
-    <ul className="filter-list">
+  <div className={classes.container}>
+    <div className={classes.title}>КОЛИЧЕСТВО ПЕРЕСАДОК</div>
+    <ul className={classes.list}>
       <FilterItem
         value="Все"
         amount="all"

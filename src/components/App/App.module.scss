@@ -1,18 +1,15 @@
 .app {
     max-width: 754px;
-    margin: 160px auto 50px;
+    margin: 160px auto 50px auto;
     width: 90%;
     font-family: 'Open Sans' sans-serif;
-    font-size: 12px;
-    line-height: 12px;
-
-    &__wrapper {
-        display: grid;
-        grid-template-columns: 232px 502px;
-        grid-column-gap: 20px;
-    }
-    &__container {
-        display: flex;
-        flex-direction: column;
-    }
 }
+.wrapper {
+    display: grid;
+    grid-template-columns: 232px 502px;
+    grid-column-gap: 20px;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    }

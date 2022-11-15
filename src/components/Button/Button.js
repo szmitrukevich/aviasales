@@ -1,13 +1,13 @@
 import React from 'react'
-import './Button.module.scss'
+import classes from './Button.module.scss'
 
 const Button = () => (
-  <div className="show-more">
+  <div className={classes['show-more']}>
     <button
-      className="button"
+      className={classes.button}
       type="button"
     >
-      Показать ещё 5 билетов
+      Показать ещё 5 билетов!
     </button>
   </div>
 )

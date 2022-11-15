@@ -7,9 +7,9 @@ import classes from './App.module.scss'
 
 const App = () => (
   <div className={classes.app}>
-    <div className={classes.app__wrapper}>
+    <div className={classes.wrapper}>
       <Filter />
-      <div className={classes.app__container}>
+      <div className={classes.container}>
         <Tabs />
         <TicketList />
       </div>

@@ -1,8 +1,20 @@
-.filter {
+.container {
     background-color: #FFFFFF;
     width: 232px;
-    height: 252px;
+    height: 272px;
     border-radius: 5px;
     box-shadow: 0px 0px 4px 0px rgba(34, 60, 80, 0.2);
-    padding: 20px 0px;
+    padding-top: 20px;
+}
+
+.title {
+    margin-left: 20px;
+    margin-bottom: 10px;
+    font-weight: 600;
+    line-height: 12px;
+    font-size: 12px;
+}
+
+.list {
+    margin-bottom: 0;
 }

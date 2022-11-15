@@ -1,10 +1,10 @@
 import React from 'react'
-import './TicketList.module.scss'
+import classes from './TicketList.module.scss'
 import Ticket from '../Ticket'
 import Button from '../Button'
 
 const TicketList = () => (
-  <div className="ticketList">
+  <div className={classes.wrapper}>
     <Ticket />
     <Ticket />
     <Ticket />
