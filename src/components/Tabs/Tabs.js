@@ -1,5 +1,6 @@
 import React from 'react'
 import { Radio } from 'antd'
+// import { connect } from 'react-redux'
 import 'antd/dist/antd.min.css'
 import './Tabs.scss'
 import logo from '../../assets/logos/Logo.svg'
@@ -34,18 +35,21 @@ const Tabs = () => {
         <Radio.Button
           value="cheap"
           style={btnStyle}
+          onClick={(e) => console.log(e.target.value)}
         >
           САМЫЙ ДЕШЁВЫЙ
         </Radio.Button>
         <Radio.Button
           value="fast"
           style={btnStyle}
+          onClick={(e) => console.log(e.target.value)}
         >
           САМЫЙ БЫСТРЫЙ
         </Radio.Button>
         <Radio.Button
           value="optimal"
           style={btnStyle}
+          onClick={(e) => console.log(e.target.value)}
         >
           ОПТИМАЛЬНЫЙ
         </Radio.Button>
