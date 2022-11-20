@@ -12,7 +12,10 @@ export default class AviasalesService {
   }
 
   async getTickets(id) {
-    const res = await fetch(`${this._apiBase}tickets?searchId=${id}`)
+    let res = await fetch(`${this._apiBase}tickets?searchId=${id}`)
+    if (res.status === '500') {
+      res = await fetch(`${this._apiBase}tickets?searchId=${id}`)
+    }
     return res.json()
   }
 }
