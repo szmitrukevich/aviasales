@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 import classes from './Filter.module.scss'
 import FilterItem from '../FilterItem'
 
-const Filter = (props) => {
+const Filter = ({ checked }) => {
   const filtersData = {
     all: 'Все',
     none: 'Без пересадок',
@@ -11,13 +12,15 @@ const Filter = (props) => {
     2: '2 пересадки',
     3: '3 пересадки',
   }
-  console.log(Object.keys(filtersData))
+  const [checkedList, setCheckedList] = useState({ ...checked })
+  useEffect(() => {
+    setCheckedList(checked)
+  }, [checked])
   const filterList = Object.entries(filtersData).map((item) => (
     <FilterItem
       value={item[1]}
       amount={item[0]}
-      // eslint-disable-next-line react/destructuring-assignment
-      checked={props[item[0]]}
+      checked={checkedList[item[0]]}
       key={item[0]}
     />
   ))
@@ -29,8 +32,12 @@ const Filter = (props) => {
   )
 }
 
+Filter.defaultProps = { checked: {} }
+
+Filter.propTypes = { checked: PropTypes.shape({}) }
+
 function mapStateToProps(store) {
-  return store.checked
+  return { checked: store.filter.checked }
 }
 
 export default connect(mapStateToProps)(Filter)

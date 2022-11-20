@@ -1,11 +1,12 @@
 import React from 'react'
 import { Radio } from 'antd'
-// import { connect } from 'react-redux'
-import 'antd/dist/antd.min.css'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+import sortChange from '../../actions/sortChange'
 import './Tabs.scss'
 import logo from '../../assets/logos/Logo.svg'
 
-const Tabs = () => {
+const Tabs = ({ updateSort }) => {
   const groupStyle = {
     width: '100%',
     borderRadius: '5px',
@@ -28,28 +29,28 @@ const Tabs = () => {
         />
       </div>
       <Radio.Group
-        defaultValue="cheap"
+        defaultValue="cheapeast"
         buttonStyle="solid"
         style={groupStyle}
       >
         <Radio.Button
-          value="cheap"
+          value="cheapeast"
           style={btnStyle}
-          onClick={(e) => console.log(e.target.value)}
+          onClick={() => updateSort('cheapeast')}
         >
           САМЫЙ ДЕШЁВЫЙ
         </Radio.Button>
         <Radio.Button
-          value="fast"
+          value="fastest"
           style={btnStyle}
-          onClick={(e) => console.log(e.target.value)}
+          onClick={() => updateSort('fastest')}
         >
           САМЫЙ БЫСТРЫЙ
         </Radio.Button>
         <Radio.Button
           value="optimal"
           style={btnStyle}
-          onClick={(e) => console.log(e.target.value)}
+          onClick={() => updateSort('optimal')}
         >
           ОПТИМАЛЬНЫЙ
         </Radio.Button>
@@ -58,4 +59,17 @@ const Tabs = () => {
   )
 }
 
-export default Tabs
+Tabs.defaultProps = { updateSort: () => null }
+
+Tabs.propTypes = { updateSort: PropTypes.func }
+function mapStateToProps(state) {
+  return state
+}
+function mapDispatchToProps(dispatch) {
+  return {
+    updateSort: (tab) => {
+      dispatch(sortChange(tab))
+    },
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Tabs)

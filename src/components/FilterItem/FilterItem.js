@@ -1,22 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import filterChange from '../../actions/filterChange'
 import classes from './FilterItem.module.scss'
 
 const FilterItem = ({ value, amount, checked, updateFilter }) => (
-  // const dispatch = useDispatch()
-  // const filter = useSelector((state) => state.checked[amount])
-  // const updateFilter = () => {
-  //   dispatch({ type: `TOGGLE_${amount.toUpperCase()}` })
-  // }
   <li className={classes.item}>
     <input
       id={amount}
       type="checkbox"
       value={amount}
       className={classes.checkbox}
-      defaultChecked={checked}
-      onClick={() => updateFilter(amount)}
+      checked={checked}
+      onChange={() => updateFilter(amount)}
     />
     <label htmlFor={amount}>{value}</label>
   </li>
@@ -25,14 +21,14 @@ const FilterItem = ({ value, amount, checked, updateFilter }) => (
 FilterItem.defaultProps = {
   value: 'Все',
   amount: 'all',
-  checked: {},
+  checked: true,
   updateFilter: () => null,
 }
 
 FilterItem.propTypes = {
   value: PropTypes.string,
   amount: PropTypes.string,
-  checked: PropTypes.shape({}),
+  checked: PropTypes.bool,
   updateFilter: PropTypes.func,
 }
 function mapStateToProps(state) {
@@ -41,9 +37,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     updateFilter: (filter) => {
-      console.log(filter)
-      const action = { type: `TOGGLE_${filter}` }
-      dispatch(action)
+      dispatch(filterChange(filter))
     },
   }
 }
