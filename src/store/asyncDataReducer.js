@@ -17,8 +17,6 @@ export const getSearchId = () => (dispatch) => {
     .catch(() => dispatch(updateSearchId('')))
 }
 
-getSearchId()
-
 export const getTickets = (searchId) => (dispatch) => {
   search
     .getTickets(searchId)

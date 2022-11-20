@@ -1,18 +1,22 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import { Spin } from 'antd'
+// import { Spin } from 'antd'
 import PropTypes from 'prop-types'
-import { getSearchId, getTickets } from '../../store/asyncDataReducer'
+import AviasalesService from '../../services/aviasalesService'
+// import { getSearchId, getTickets } from '../../store/asyncDataReducer'
 import classes from './TicketList.module.scss'
 import Ticket from '../Ticket'
 import Button from '../Button'
 
-const TicketList = ({ sortItem, ticketsData, searchId, isLoading }) => {
+const TicketList = ({ sortItem, searchId }) => {
+  const [ticketsData, setTicketsData] = useState([])
   const [sortedList, setSortedList] = useState([...ticketsData].sort((a, b) => a.price - b.price))
-  const ticketList = sortedList.map(() => (
+  const search = new AviasalesService()
+  const ticketList = sortedList.map((item) => (
     <Ticket
-      price={1}
-      time={1}
+      price={item.price}
+      carrier={item.carrier}
+      routeInfo={item.segments}
       key={Math.random()}
     />
   ))
@@ -33,14 +37,14 @@ const TicketList = ({ sortItem, ticketsData, searchId, isLoading }) => {
   }
 
   useEffect(() => {
-    getSearchId()
-    if (isLoading) {
-      getTickets(searchId)
-    }
+    search
+      .getSearchId()
+      .then((res) => search.getTickets(res.searchId))
+      .then((res) => setTicketsData(res.tickets.slice(9)))
     sortList(sortItem)
-  }, [sortItem, ticketsData, searchId, isLoading])
+  }, [sortItem, searchId])
 
-  const data = isLoading ? <Spin /> : ticketList
+  const data = ticketList
   return (
     <div className={classes.wrapper}>
       {data}
@@ -48,13 +52,13 @@ const TicketList = ({ sortItem, ticketsData, searchId, isLoading }) => {
     </div>
   )
 }
-TicketList.defaultProps = { sortItem: '', ticketsData: [], searchId: '', isLoading: true }
+TicketList.defaultProps = { sortItem: '', searchId: '' }
 
 TicketList.propTypes = {
   sortItem: PropTypes.string,
-  ticketsData: PropTypes.arrayOf(PropTypes.shape()),
+  // ticketsData: PropTypes.arrayOf(PropTypes.shape()),
   searchId: PropTypes.string,
-  isLoading: PropTypes.bool,
+  // isLoading: PropTypes.bool,
 }
 
 function mapStateToProps(state) {

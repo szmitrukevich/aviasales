@@ -3,24 +3,24 @@ import PropTypes from 'prop-types'
 import Route from '../Route'
 import classes from './Ticket.module.scss'
 
-const Ticket = ({ price, time }) => (
+const Ticket = ({ price, carrier, routeInfo }) => (
   <div className={classes.wrapper}>
     <div className={classes.container}>
-      <div className={classes.price}>{price}</div>
+      <div className={classes.price}>{`${price} Р`}</div>
       <div className="logo">
         <img
-          src="https://pics.avs.io/99/36/S7.png"
+          src={`https://pics.avs.io/99/36/${carrier}.png`}
           alt="logo"
         />
       </div>
     </div>
-    <Route time={time} />
-    <Route time={time} />
+    <Route info={routeInfo[0]} />
+    <Route info={routeInfo[1]} />
   </div>
 )
 
-Ticket.defaultProps = { time: null, price: null }
+Ticket.defaultProps = { routeInfo: null, price: null, carrier: null }
 
-Ticket.propTypes = { time: PropTypes.number, price: PropTypes.number }
+Ticket.propTypes = { routeInfo: PropTypes.arrayOf(PropTypes.shape), price: PropTypes.number, carrier: PropTypes.string }
 
 export default Ticket

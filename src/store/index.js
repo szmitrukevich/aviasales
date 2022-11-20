@@ -16,5 +16,5 @@ const store = configureStore({
   middleware: [thunk],
 })
 
-setInterval(() => console.log(store.getState()), 3000)
+// setInterval(() => console.log(store.getState()), 3000)
 export default store
