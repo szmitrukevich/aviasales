@@ -1,20 +1,18 @@
-import { configureStore, combineReducers } from '@reduxjs/toolkit'
+import { configureStore } from '@reduxjs/toolkit'
 import thunk from 'redux-thunk'
-// import devToolsEnhancer from 'remote-redux-devtools'
 import filterReducer from './filterReducer'
 import sortReducer from './sortReducer'
 import asyncDataReducer from './asyncDataReducer'
 
-const rootReducer = combineReducers({
-  filter: filterReducer,
-  sort: sortReducer,
-  data: asyncDataReducer,
-})
-
 const store = configureStore({
-  reducer: rootReducer,
+  reducer: {
+    filter: filterReducer,
+    sort: sortReducer,
+    data: asyncDataReducer,
+  },
   middleware: [thunk],
+  devTools: process.env.NODE_ENV !== 'production',
 })
 
-// setInterval(() => console.log(store.getState()), 3000)
+// setInterval(() => console.log(store.getState()), 5000)
 export default store

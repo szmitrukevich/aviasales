@@ -9,6 +9,17 @@
     position: relative;
 }
 
+.direction, .duration, .transfers {
+    width: 30%;
+}
 .transfers {
-    width: 141px;
+    @media (max-width: 400px) {
+        margin-top: 20px;
+    }
+}
+.psEl {
+    position: absolute;
+    color: #A0B0B9;
+    font-size: 12px;
+    top: -18px;
 }

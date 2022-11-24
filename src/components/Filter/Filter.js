@@ -7,7 +7,7 @@ import FilterItem from '../FilterItem'
 const Filter = ({ checked }) => {
   const filtersData = {
     all: 'Все',
-    none: 'Без пересадок',
+    0: 'Без пересадок',
     1: '1 пересадка',
     2: '2 пересадки',
     3: '3 пересадки',

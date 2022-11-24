@@ -5,7 +5,6 @@ import classes from './Route.module.scss'
 
 const Route = ({ info }) => {
   const { origin, destination, date, duration, stops } = info
-  const style = { position: 'absolute', color: '#A0B0B9', fontSize: '12px', top: '-18px' }
   const transfer = (data) => {
     if (data.length === 1) {
       return '1 ПЕРEСАДКА'
@@ -19,23 +18,25 @@ const Route = ({ info }) => {
   const formDate = `${format(new Date(date), 'hh:mm')} - ${format(addMinutes(new Date(date), duration), 'hh:mm')}`
   return (
     <div className={classes.container}>
-      <div className="direction">{formDate}</div>
-      <div style={{ ...style }}>{`${origin} - ${destination}`}</div>
-      <div
-        className="duration"
-        style={{ position: 'relative', left: '-20px' }}
-      >
+      <div className={classes.direction}>
+        <div className={classes.psEl}>{`${origin} - ${destination}`}</div>
+        {formDate}
+      </div>
+      <div className={classes.duration}>
+        <div className={classes.psEl}>В ПУТИ</div>
         {travelDur}
       </div>
-      <div style={{ ...style, left: '160px' }}>В ПУТИ</div>
-      <div className={classes.transfers}>{stops.join(',')}</div>
-      <div style={{ ...style, left: '320px', width: '140px' }}>{transfer(stops)}</div>
+      <div className={classes.transfers}>
+        {' '}
+        <div className={classes.psEl}>{transfer(stops)}</div>
+        {stops.join(',')}
+      </div>
     </div>
   )
 }
 
 Route.defaultProps = { info: {} }
 
-Route.propTypes = { info: PropTypes.shape }
+Route.propTypes = { info: PropTypes.shape() }
 
 export default Route

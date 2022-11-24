@@ -11,11 +11,25 @@ export default class AviasalesService {
     return res.json()
   }
 
-  async getTickets(id) {
-    let res = await fetch(`${this._apiBase}tickets?searchId=${id}`)
-    if (res.status === '500') {
+  async sendRequest(id) {
+    let res
+    try {
       res = await fetch(`${this._apiBase}tickets?searchId=${id}`)
+      if (res.status === 500) {
+        throw new Error('500')
+      }
+    } catch (e) {
+      if (e.message === '500') {
+        res = this.sendRequest(id)
+        return res
+      }
+      throw new Error()
     }
+    return res
+  }
+
+  async getTickets(id) {
+    const res = await this.sendRequest(id)
     return res.json()
   }
 }

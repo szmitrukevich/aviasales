@@ -1,5 +1,7 @@
+import { CHANGE_SORT } from './actionTypes'
+
 const sortChange = (sortName) => ({
-  type: 'CHANGE_SORT',
+  type: CHANGE_SORT,
   payload: sortName,
 })
 

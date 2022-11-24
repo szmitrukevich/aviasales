@@ -1,7 +1,9 @@
+import { FILTER_CHANGE } from '../actions/actionTypes'
+
 const initialState = {
   checked: {
     all: true,
-    none: true,
+    0: true,
     1: true,
     2: true,
     3: true,
@@ -31,7 +33,7 @@ const updateFilters = (filter, filterList) => {
 const filterReducer = (state = initialState, { type, payload } = {}) => {
   const { checked } = state
   switch (type) {
-    case 'FILTER_CHANGE':
+    case FILTER_CHANGE:
       return { checked: updateFilters(payload, checked) }
     default:
       return state

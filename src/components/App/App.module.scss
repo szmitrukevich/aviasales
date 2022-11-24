@@ -2,12 +2,25 @@
     max-width: 754px;
     margin: 160px auto 50px auto;
     width: 90%;
+    @media (max-width: 815px) {
+        width: 80%;
+    }
     font-family: 'Open Sans' sans-serif;
+    position: relative;
+    &_image {
+        position: absolute;
+        top: -120px;
+        left: 40vw;
+    }
 }
 .wrapper {
     display: grid;
     grid-template-columns: 232px 502px;
     grid-column-gap: 20px;
+    @media (max-width: 815px) {
+        display: flex;
+        flex-direction: column;
+    }
 }
 .container {
     display: flex;

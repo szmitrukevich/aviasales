@@ -1,5 +1,6 @@
 import AvaisalesService from '../services/aviasalesService'
-import { toggleIsLoading, updateSearchId, updateTicketList } from '../actions/apiActions'
+import { toggleIsLoading, updateSearchId, updateTicketList, throwError } from '../actions/apiActions'
+import { TICKETS_LOAD, GET_SEARCH_ID, GET_TICKETS, GET_ERROR } from '../actions/actionTypes'
 
 const search = new AvaisalesService()
 
@@ -7,6 +8,7 @@ const initialState = {
   isLoading: true,
   searchId: '',
   tickets: [],
+  error: false,
 }
 export const getSearchId = () => (dispatch) => {
   search
@@ -14,30 +16,41 @@ export const getSearchId = () => (dispatch) => {
     .then((res) => {
       dispatch(updateSearchId(res.searchId))
     })
-    .catch(() => dispatch(updateSearchId('')))
+    .catch(() => {
+      dispatch(toggleIsLoading(false))
+      dispatch(throwError(true))
+    })
 }
 
 export const getTickets = (searchId) => (dispatch) => {
+  dispatch(toggleIsLoading(true))
   search
     .getTickets(searchId)
     .then((res) => {
       dispatch(updateTicketList(res.tickets))
-      if (res.stop) {
-        dispatch(toggleIsLoading(!res.stop))
+      if (!res.stop) {
+        getTickets(searchId)
+      } else {
+        dispatch(toggleIsLoading(false))
       }
     })
-    .catch(() => updateTicketList([]))
+    .catch(() => {
+      dispatch(toggleIsLoading(false))
+      dispatch(throwError(true))
+    })
 }
 
 const asyncDataReducer = (state = initialState, { type, payload } = {}) => {
   const { tickets } = state
   switch (type) {
-    case 'TICKETS_LOAD':
+    case TICKETS_LOAD:
       return { ...state, isLoading: payload }
-    case 'GET_SEARCH_ID':
+    case GET_SEARCH_ID:
       return { ...state, searchId: payload }
-    case 'GET_TICKETS':
+    case GET_TICKETS:
       return { ...state, tickets: [...tickets, ...payload] }
+    case GET_ERROR:
+      return { ...state, error: true }
     default:
       return state
   }

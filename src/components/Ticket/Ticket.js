@@ -19,8 +19,12 @@ const Ticket = ({ price, carrier, routeInfo }) => (
   </div>
 )
 
-Ticket.defaultProps = { routeInfo: null, price: null, carrier: null }
+Ticket.defaultProps = { routeInfo: [{}, {}], price: null, carrier: null }
 
-Ticket.propTypes = { routeInfo: PropTypes.arrayOf(PropTypes.shape), price: PropTypes.number, carrier: PropTypes.string }
+Ticket.propTypes = {
+  routeInfo: PropTypes.arrayOf(PropTypes.shape()),
+  price: PropTypes.number,
+  carrier: PropTypes.string,
+}
 
 export default Ticket

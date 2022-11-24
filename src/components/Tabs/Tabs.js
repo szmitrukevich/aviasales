@@ -4,56 +4,42 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import sortChange from '../../actions/sortChange'
 import './Tabs.scss'
-import logo from '../../assets/logos/Logo.svg'
+
+const groupStyle = { width: '100%', borderRadius: '20px' }
+const btnStyle = {
+  height: '50px',
+  width: '33.3%',
+  textAlign: 'center',
+  paddingTop: '12px',
+  lineHeight: '20px',
+  fontSize: '12px',
+  fontWeight: '600',
+}
 
 const Tabs = ({ updateSort }) => {
-  const groupStyle = {
-    width: '100%',
-    borderRadius: '5px',
+  const btnList = {
+    cheapest: 'САМЫЙ ДЕШЁВЫЙ',
+    fastest: 'САМЫЙ БЫСТРЫЙ',
+    optimal: 'ОПТИМАЛЬНЫЙ',
   }
-  const btnStyle = {
-    height: '50px',
-    width: '167px',
-    textAlign: 'center',
-    paddingTop: '12px',
-    lineHeight: '20px',
-    fontSize: '12px',
-    fontWeight: '600',
-  }
+  const btns = Object.entries(btnList).map((item) => (
+    <Radio.Button
+      value={item[0]}
+      style={btnStyle}
+      onClick={() => updateSort(item[0])}
+      key={item[0]}
+    >
+      {item[1]}
+    </Radio.Button>
+  ))
   return (
     <div className="Tabs">
-      <div className="Tabs_image">
-        <img
-          src={logo}
-          alt="logo"
-        />
-      </div>
       <Radio.Group
-        defaultValue="cheapeast"
+        defaultValue="cheapest"
         buttonStyle="solid"
         style={groupStyle}
       >
-        <Radio.Button
-          value="cheapeast"
-          style={btnStyle}
-          onClick={() => updateSort('cheapeast')}
-        >
-          САМЫЙ ДЕШЁВЫЙ
-        </Radio.Button>
-        <Radio.Button
-          value="fastest"
-          style={btnStyle}
-          onClick={() => updateSort('fastest')}
-        >
-          САМЫЙ БЫСТРЫЙ
-        </Radio.Button>
-        <Radio.Button
-          value="optimal"
-          style={btnStyle}
-          onClick={() => updateSort('optimal')}
-        >
-          ОПТИМАЛЬНЫЙ
-        </Radio.Button>
+        {btns}
       </Radio.Group>
     </div>
   )
