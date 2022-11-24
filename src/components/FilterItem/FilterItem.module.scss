@@ -16,6 +16,9 @@
             align-items: center;
             user-select: none;
             cursor: pointer;
+            @media (max-width: 815px) {
+                width: 120px;
+            }
             &::before {
                 content: '';
                 display: inline-block;
