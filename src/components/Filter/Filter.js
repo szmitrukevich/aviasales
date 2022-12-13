@@ -5,23 +5,22 @@ import classes from './Filter.module.scss'
 import FilterItem from '../FilterItem'
 
 const Filter = ({ checked }) => {
-  const filtersData = {
-    all: 'Все',
-    0: 'Без пересадок',
-    1: '1 пересадка',
-    2: '2 пересадки',
-    3: '3 пересадки',
-  }
+  const filtersData = [
+    { amount: 'all', value: 'Все' },
+    { amount: '1', value: '1 пересадка' },
+    { amount: '2', value: '2 пересадки' },
+    { amount: '3', value: '3 пересадки' },
+  ]
   const [checkedList, setCheckedList] = useState({ ...checked })
   useEffect(() => {
     setCheckedList(checked)
   }, [checked])
-  const filterList = Object.entries(filtersData).map((item) => (
+  const filterList = filtersData.map((item) => (
     <FilterItem
-      value={item[1]}
-      amount={item[0]}
-      checked={checkedList[item[0]]}
-      key={item[0]}
+      value={item.value}
+      amount={item.amount}
+      checked={checkedList[item.amount]}
+      key={item.amount}
     />
   ))
   return (

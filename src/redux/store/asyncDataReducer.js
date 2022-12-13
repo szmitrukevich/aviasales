@@ -1,4 +1,4 @@
-import AvaisalesService from '../services/aviasalesService'
+import AvaisalesService from '../../services/aviasalesService'
 import { toggleIsLoading, updateSearchId, updateTicketList, throwError } from '../actions/apiActions'
 import { TICKETS_LOAD, GET_SEARCH_ID, GET_TICKETS, GET_ERROR } from '../actions/actionTypes'
 

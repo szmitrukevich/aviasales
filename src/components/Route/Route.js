@@ -6,13 +6,14 @@ import classes from './Route.module.scss'
 const Route = ({ info }) => {
   const { origin, destination, date, duration, stops } = info
   const transfer = (data) => {
-    if (data.length === 1) {
-      return '1 ПЕРEСАДКА'
+    switch (data.length) {
+      case 0:
+        return 'БЕЗ ПЕРЕСАДОК'
+      case 1:
+        return '1 ПЕРEСАДКА'
+      default:
+        return `${data.length} ПЕРЕСАДКИ`
     }
-    if (data.length > 1) {
-      return `${data.length} ПЕРЕСАДКИ`
-    }
-    return 'БЕЗ ПЕРЕСАДОК'
   }
   const travelDur = `${Math.floor(duration / 60)}ч ${duration % 60}м`
   const formDate = `${format(new Date(date), 'hh:mm')} - ${format(addMinutes(new Date(date), duration), 'hh:mm')}`

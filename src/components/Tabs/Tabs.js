@@ -2,42 +2,29 @@ import React from 'react'
 import { Radio } from 'antd'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import sortChange from '../../actions/sortChange'
-import './Tabs.scss'
-
-const groupStyle = { width: '100%', borderRadius: '20px' }
-const btnStyle = {
-  height: '50px',
-  width: '33.3%',
-  textAlign: 'center',
-  paddingTop: '12px',
-  lineHeight: '20px',
-  fontSize: '12px',
-  fontWeight: '600',
-}
+import sortChange from '../../redux/actions/sortChange'
+import classes from './Tabs.module.scss'
 
 const Tabs = ({ updateSort }) => {
-  const btnList = {
-    cheapest: 'САМЫЙ ДЕШЁВЫЙ',
-    fastest: 'САМЫЙ БЫСТРЫЙ',
-    optimal: 'ОПТИМАЛЬНЫЙ',
-  }
-  const btns = Object.entries(btnList).map((item) => (
+  const btnList = [
+    { filter: 'cheapest', value: 'САМЫЙ ДЕШЁВЫЙ' },
+    { filter: 'fastest', value: 'САМЫЙ БЫСТРЫЙ' },
+    { filter: 'optimal', value: 'ОПТИМАЛЬНЫЙ' },
+  ]
+  const btns = btnList.map((item) => (
     <Radio.Button
-      value={item[0]}
-      style={btnStyle}
-      onClick={() => updateSort(item[0])}
-      key={item[0]}
+      value={item.filter}
+      onClick={() => updateSort(item.filter)}
+      key={item.filter}
     >
-      {item[1]}
+      <div className={classes.text}>{item.value}</div>
     </Radio.Button>
   ))
   return (
-    <div className="Tabs">
+    <div className={classes.wrapper}>
       <Radio.Group
         defaultValue="cheapest"
         buttonStyle="solid"
-        style={groupStyle}
       >
         {btns}
       </Radio.Group>

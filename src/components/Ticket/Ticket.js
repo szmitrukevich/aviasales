@@ -3,13 +3,15 @@ import PropTypes from 'prop-types'
 import Route from '../Route'
 import classes from './Ticket.module.scss'
 
+const baseUrl = 'https://pics.avs.io/99/36/'
+
 const Ticket = ({ price, carrier, routeInfo }) => (
   <div className={classes.wrapper}>
     <div className={classes.container}>
       <div className={classes.price}>{`${price} Р`}</div>
       <div className="logo">
         <img
-          src={`https://pics.avs.io/99/36/${carrier}.png`}
+          src={`${baseUrl}${carrier}.png`}
           alt="logo"
         />
       </div>

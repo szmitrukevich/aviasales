@@ -1,5 +1,6 @@
 import React from 'react'
 import 'antd/dist/antd.min.css'
+import './Tabs.scss'
 import Tabs from '../Tabs'
 import TicketList from '../TicketList'
 import Filter from '../Filter'

@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import filterChange from '../../actions/filterChange'
+import filterChange from '../../redux/actions/filterChange'
 import classes from './FilterItem.module.scss'
 
 const FilterItem = ({ value, amount, checked, updateFilter }) => (
