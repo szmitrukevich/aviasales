@@ -8,48 +8,7 @@ import classes from './TicketList.module.scss'
 import Ticket from '../Ticket'
 import Button from '../Button'
 import ErrorMessage from '../ErrorMessage/ErrorMessage'
-
-const sortList = (data, method) => {
-  switch (method) {
-    case 'cheapest':
-      return [...data].sort((a, b) => a.price - b.price)
-    case 'fastest':
-      return [...data].sort(
-        (a, b) => a.segments[0].duration + a.segments[1].duration - (b.segments[0].duration + b.segments[1].duration)
-      )
-    case 'optimal':
-      return [...data].sort(
-        (a, b) =>
-          a.price -
-          b.price +
-          (a.segments[0].duration + a.segments[1].duration) -
-          (b.segments[0].duration + b.segments[1].duration)
-      )
-    default:
-      return data
-  }
-}
-const getSelectedFilters = (obj) => {
-  const keysSelectedFilters = []
-  Object.keys(obj).forEach((key) => {
-    if (obj[key]) {
-      keysSelectedFilters.push(key)
-    }
-  })
-  return keysSelectedFilters
-}
-
-const applyFilters = (data, list) => {
-  const selectedFilters = getSelectedFilters(list)
-  if (!list.all) {
-    return data.filter(
-      (item) =>
-        selectedFilters.includes(item.segments[0].stops.length.toString()) &&
-        selectedFilters.includes(item.segments[1].stops.length.toString())
-    )
-  }
-  return data
-}
+import { sortList, applyFilters } from '../../utils/sortLogic'
 
 const createNewTicket = (item) => (
   <Ticket
@@ -81,7 +40,7 @@ const TicketList = ({ sortItem, searchId, filters, ticketsData, isLoading, getId
       {ticketList}
       <Button
         onClick={() => setTicketsNumber(ticketsNumber + 5)}
-        btnClass="show-more"
+        variant="show-more"
         text="ПОКАЗАТЬ ЕЩЁ 5 БИЛЕТОВ!"
       />
     </>
