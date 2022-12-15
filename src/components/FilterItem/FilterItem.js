@@ -2,17 +2,18 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import filterChange from '../../redux/actions/filterChange'
+import { updateFilters } from '../../utils/filterLogic'
 import classes from './FilterItem.module.scss'
 
-const FilterItem = ({ value, amount, checked, updateFilter }) => (
+const FilterItem = ({ value, amount, isChecked, filterChanged, checkedList }) => (
   <li className={classes.item}>
     <input
       id={amount}
       type="checkbox"
       value={amount}
       className={classes.checkbox}
-      checked={checked}
-      onChange={() => updateFilter(amount)}
+      checked={isChecked}
+      onChange={() => filterChanged(updateFilters(amount, checkedList))}
     />
     <label htmlFor={amount}>{value}</label>
   </li>
@@ -21,22 +22,24 @@ const FilterItem = ({ value, amount, checked, updateFilter }) => (
 FilterItem.defaultProps = {
   value: 'Все',
   amount: 'all',
-  checked: true,
-  updateFilter: () => null,
+  isChecked: true,
+  filterChanged: () => null,
+  checkedList: {},
 }
 
 FilterItem.propTypes = {
   value: PropTypes.string,
   amount: PropTypes.string,
-  checked: PropTypes.bool,
-  updateFilter: PropTypes.func,
+  isChecked: PropTypes.bool,
+  filterChanged: PropTypes.func,
+  checkedList: PropTypes.shape(),
 }
 function mapStateToProps(state) {
-  return state
+  return { checkedList: state.filter.checked }
 }
 function mapDispatchToProps(dispatch) {
   return {
-    updateFilter: (filter) => {
+    filterChanged: (filter) => {
       dispatch(filterChange(filter))
     },
   }

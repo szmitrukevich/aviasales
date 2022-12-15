@@ -1,8 +1,8 @@
 import { FILTER_CHANGE } from './actionTypes'
 
-const filterChange = (filterName) => ({
+const filterChange = (filterList) => ({
   type: FILTER_CHANGE,
-  payload: filterName,
+  payload: filterList,
 })
 
 export default filterChange

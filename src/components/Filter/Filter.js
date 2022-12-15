@@ -7,6 +7,7 @@ import FilterItem from '../FilterItem'
 const Filter = ({ checked }) => {
   const filtersData = [
     { amount: 'all', value: 'Все' },
+    { amount: '0', value: 'Без пересадок' },
     { amount: '1', value: '1 пересадка' },
     { amount: '2', value: '2 пересадки' },
     { amount: '3', value: '3 пересадки' },
@@ -19,7 +20,7 @@ const Filter = ({ checked }) => {
     <FilterItem
       value={item.value}
       amount={item.amount}
-      checked={checkedList[item.amount]}
+      isChecked={checkedList[item.amount]}
       key={item.amount}
     />
   ))
